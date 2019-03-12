@@ -1,4 +1,4 @@
-#install.packages("reticulate)
+#install.packages("reticulate")
 #library("reticulate")
 source_python("/home/jovyan/work/HA_script.py")
 
