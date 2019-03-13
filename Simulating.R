@@ -12,20 +12,18 @@
     # outputs: proportion estimate, iters, time, seed, population, true proportions, starting guess, team member.
     # Getting the seed for the runiform draw from snpsampgen.R
 
-# Thanks to Ian for "snpsampgen.R" and "SLSQPmixturesR.R." And to Jordan for "HA_script.py"
+# Thanks to Ian for "snpsampgen.R" and "SLSQPmixturesR.R." And to Jordan for "HA_script.py."
 
-
-install.packages("nloptr")    # Needs to be installed on the server. IT contains our SLSQP R function
+#load(file="mixtures/Mixtures.git/total_strict_fine_maf01_atleastone.RData")
+install.packages("nloptr")    # Needs to be installed on the server. IT contains our SLSQP R function.
 library("nloptr")
-library("reticulate")         # Reticulate is already installed on the server. It links Python with R
+library("reticulate")         # Reticulate is already installed on the server. It links Python with R.
 
 rm(snpsampgen, SLSQPmixtures, HA, R, minimize, r, guess, af, A, i, numberSims, population1, population2, guess1, guess2, k, popfrac1, popfrac2, END, START, HA_, Python_) # remove everything except for total.c because it is a huge file.
 
 source("/home/jovyan/work/snpsampgen.R")
 source("/home/jovyan/work/SLSQPmixturesR.R")
 source_python("/home/jovyan/work/HA_script.py")    # From the "reticulate" package.
-
-#load(file="mixtures/Mixtures.git/total_strict_fine_maf01_atleastone.RData")
 
 START <- Sys.time()
 numberSims <- 100              # Start with 10. then try 100 or 1000.
@@ -41,17 +39,20 @@ teamMember <- "your_name"    # Put your name here.
 seed <- 1                    # get this from snpsampgen.R. the same seed is used for both python and r versions of SLSQP.
 
 for (i in 1:numberSims){
+    A <- snpsampgen(k, population1 , population2, popfrac1, popfrac2)  # Simulating a sample pop with new SNPs.
     
-    A <- snpsampgen(k, population1 , population2, popfrac1, popfrac2)
     # Calling the SLSQPmixtures function from SLSQPmixturesR.R
-    Python_ <- print(SLSQPmixtures(A, k))  
-    #Calling the HA function from HA_script.py                      
-    af <- cbind(A$AF)    # Might just be A$af
-    A <- cbind(A$CEU_MAF, A$afr_MAF)         # CHANGEME: cbind(A$afr_MAF, A$CEU_MAF) etc
-    guess <- rbind(guess1, guess2)
-    HA_ <- print(HA(A, af, guess))
+    Python_ <- print(SLSQPmixtures(A, k))                              # Pi-values, iters, time.
+    
+    # Calling the HA function from HA_script.py                      
+    af <- cbind(A$AF)                                                  # Total allele frequency
+    A <- cbind(A$CEU_MAF, A$afr_MAF)                                   # CHANGEME: cbind(A$afr_MAF, A$CEU_MAF) etc
+    guess <- rbind(guess1, guess2)                                     # kx1 vector of starting guesses.
+    HA_ <- print(HA(A, af, guess))                                     # Pi-values, iters, time.
+    
     output <- rbind(output, c(HA_[1], HA_[2], HA_[3], Python_[1], Python_[2], Python_[3], seed, population1, popfrac1, guess1, population2, popfrac2, guess2, teamMember))
     print(i)
 }
+
 END <- Sys.time()
 END - START
