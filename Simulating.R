@@ -1,12 +1,18 @@
 # "snpsampgen.R" contains a function that takes a new set of 100,000 SNP and uses those to simulate a sample population of size k.
+
 # "SLSQPmixturesR.R" contains a function that feeds this population matrix into the SLSQP algorithm in R.
+
 # "HA_script.py" contains a function that feeds this sample population matrix into the SLSQP algorithm in Python.
+
 # At the end of every iteration of this look will be printed the estimated pi-values, number of iterations, and time for both versions of SLSQP.
+
 # The source scripts needed to execute this code can be found at https://github.com/GregoryMatesi/SimulationDesign
+
 # Needs work on the 
     #outputs: time, iters, pi-value, true proportion, seed, starting value...
     #finding a random pi proportion within an interval
     #...
+
 # Thanks to Ian for "snpsampgen.R" and "SLSQPmixturesR.R." And to Jordan for "HA_script.py"
 
 
