@@ -1,3 +1,8 @@
+# "snpsampgen.R" contains a function that takes a new set of 100,000 SNP and uses those to simulate a sample population of size k.
+# "SLSQPmixturesR.R" contains a function that feeds this population matrix into the SLSQP algorithm in R.
+# "HA_script.py" contains a function that feeds this sample population matrix into the SLSQP algorithm in Python.
+# At the end of every iteration of this look will be printed the estimated pi-values, number of iterations, and time for both versions of SLSQP.
+# The source scripts needed to execute this code can be found at https://github.com/GregoryMatesi/SimulationDesign
 
 install.packages("nloptr")
 library("nloptr")
