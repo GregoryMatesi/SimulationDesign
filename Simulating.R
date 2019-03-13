@@ -9,9 +9,8 @@
 # The source scripts needed to execute this code can be found at https://github.com/GregoryMatesi/SimulationDesign
 
 # Needs work on the 
-    #outputs: time, iters, pi-value, true proportion, seed, starting value...
-    #finding a random pi proportion within an interval
-    #...
+    # outputs: proportion estimate, iters, time, seed, population, true proportions, starting guess, team member.
+    # Getting the seed for the runiform draw from snpsampgen.R
 
 # Thanks to Ian for "snpsampgen.R" and "SLSQPmixturesR.R." And to Jordan for "HA_script.py"
 
@@ -29,7 +28,7 @@ source_python("/home/jovyan/work/HA_script.py")    # From the "reticulate" packa
 #load(file="mixtures/Mixtures.git/total_strict_fine_maf01_atleastone.RData")
 
 START <- Sys.time()
-numberSims <- 5              # Start with 10. then try 100 or 1000.
+numberSims <- 100              # Start with 10. then try 100 or 1000.
 k <- 2                       # Number of ancestries.
 population1 <- "CEU_MAF"     # Name your ancestries
 population2 <- "afr_MAF"     # 
@@ -52,6 +51,7 @@ for (i in 1:numberSims){
     guess <- rbind(guess1, guess2)
     HA_ <- print(HA(A, af, guess))
     output <- rbind(output, c(HA_[1], HA_[2], HA_[3], Python_[1], Python_[2], Python_[3], seed, population1, popfrac1, guess1, population2, popfrac2, guess2, teamMember))
+    print(i)
 }
 END <- Sys.time()
 END - START
