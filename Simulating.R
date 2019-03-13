@@ -3,7 +3,11 @@
 # "HA_script.py" contains a function that feeds this sample population matrix into the SLSQP algorithm in Python.
 # At the end of every iteration of this look will be printed the estimated pi-values, number of iterations, and time for both versions of SLSQP.
 # The source scripts needed to execute this code can be found at https://github.com/GregoryMatesi/SimulationDesign
-# Currently the most time consuming step is generating a new sample population for every iteration. Each simulation takes 8-9 second.
+# Needs work on
+    #outputs
+    #finding a random pi proportion within an interval
+    #...
+
 
 install.packages("nloptr")    # Needs to be installed on the server. IT contains our SLSQP R function
 library("nloptr")
@@ -14,12 +18,13 @@ source("/home/jovyan/work/SLSQPmixturesR.R")
 
 #load(file="mixtures/Mixtures.git/total_strict_fine_maf01_atleastone.RData")
 
+START <- Sys.time()
 numberSims <- 100    # Start with 10. then try 100 or 1000.
-k = 2
+k = 10
 population1 ="CEU_MAF"
 population2 = "afr_MAF"
-popfrac1 = .5 # Uniform random from user chosen interval
-popfrac2 = .5 # Uniform random from user chosen interval
+popfrac1 = runif(1, 0, 0.01) # Uniform random from user chosen interval
+popfrac2 = 1 - popfrac1 # Uniform random from user chosen interval
 guess1 = .25
 guess2 = .75
 
@@ -36,5 +41,6 @@ for (i in 1:numberSims){
     #mylist <- list(Rcode, Pythoncode)
     
 }
-
-rm(snpsampgen, SLSQPmixtures, HA, R, minimize, r, guess, af, A, i, numberSims, population1, population2, guess1, guess2, k, mylist)
+END <- Sys.time()
+END - START
+rm(snpsampgen, SLSQPmixtures, HA, R, minimize, r, guess, af, A, i, numberSims, population1, population2, guess1, guess2, k, mylist, popfrac1, popfrac2, END, START)
