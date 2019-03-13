@@ -3,6 +3,11 @@
 # "HA_script.py" contains a function that feeds this sample population matrix into the SLSQP algorithm in Python.
 # At the end of every iteration of this look will be printed the estimated pi-values, number of iterations, and time for both versions of SLSQP.
 # The source scripts needed to execute this code can be found at https://github.com/GregoryMatesi/SimulationDesign
+# Needs work on the 
+	#outputs
+	#finding a random pi proportion within an interval
+	#...
+
 
 install.packages("nloptr")
 library("nloptr")
