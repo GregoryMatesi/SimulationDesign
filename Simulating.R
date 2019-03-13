@@ -26,7 +26,7 @@ source("/home/jovyan/work/SLSQPmixturesR.R")
 source_python("/home/jovyan/work/HA_script.py")    # From the "reticulate" package.
 
 START <- Sys.time()
-numberSims <- 100              # Start with 10. then try 100 or 1000.
+numberSims <- 100            # Start with 10. then try 100 or 1000.
 k <- 2                       # Number of ancestries.
 population1 <- "CEU_MAF"     # Name your ancestries
 population2 <- "afr_MAF"     # 
