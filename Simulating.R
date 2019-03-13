@@ -24,7 +24,7 @@ for (i in 1:numberSims){
     mylist <- list()
     A <- snpsampgen(2, population1 , population2, .5, .5)
     # Calling the SLSQPmixtures function from SLSQPmixturesR.R
-    #print(SLSQPmixtures(A, k))  
+    print(SLSQPmixtures(A, k))  
     #Calling the HA function from HA_script.py                      
     af <- cbind(A$AF)    # Might just be A$af
     A <- cbind(A$CEU_MAF, A$afr_MAF)         # CHANGEME: cbind(A$afr_MAF, A$CEU_MAF) etc
