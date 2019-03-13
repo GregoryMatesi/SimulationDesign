@@ -20,7 +20,7 @@ source("/home/jovyan/work/SLSQPmixturesR.R")
 
 START <- Sys.time()
 numberSims <- 100    # Start with 10. then try 100 or 1000.
-k = 10
+k = 2
 population1 ="CEU_MAF"
 population2 = "afr_MAF"
 popfrac1 = runif(1, 0, 0.01) # Uniform random from user chosen interval
