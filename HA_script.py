@@ -1,4 +1,3 @@
-### Jordan Hall's
 ### Hidden Ancestries Script
 
 ### HA : (A, taf, x_guess) -> (x_answer, n_iterations, time)
@@ -73,4 +72,4 @@ def HA(A, taf, x_guess):
     
     time= stop-start
     
-    return ans_obj.x, ans_obj.nit, time
+    return ans_obj.x[0], ans_obj.x[1], ans_obj.x[2], ans_obj.x[3], ans_obj.x[4], ans_obj.nit, time
